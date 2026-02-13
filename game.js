@@ -160,14 +160,18 @@ function stepSnake() {
     return;
   }
 
-  if (snake.some((segment) => segment.x === next.x && segment.z === next.z)) {
+const willGrow = next.x === food.x && next.z === food.z;
+const collisionSegments = willGrow ? snake : snake.slice(0, -1);
+if (collisionSegments.some((segment) => segment.x === next.x && segment.z === next.z)) {
+
     onGameOver("You crashed into yourself.");
     return;
   }
 
   snake.unshift(next);
 
-  if (next.x === food.x && next.z === food.z) {
+if (willGrow) {
+
     score += 1;
     scoreEl.textContent = String(score);
     if (score > highScore) {
@@ -232,12 +236,11 @@ function animate(ms = 0) {
   foodMesh.rotation.y += 0.03;
   glow.position.set(foodPos.x, 1.4, foodPos.z);
 
-  const head = snake[0];
-  const headPos = boardToWorld(head.x, head.z);
-  const target = new THREE.Vector3(headPos.x, 10.5, headPos.z + 9.5);
-  camera.position.lerp(target, 0.06);
-  camera.lookAt(headPos.x, 0, headPos.z);
-
+const head = snake[0];
+const headPos = boardToWorld(head.x, head.z);
+const target = new THREE.Vector3(headPos.x, 10.5, headPos.z + 9.5);
+camera.position.lerp(target, 0.06);
+camera.lookAt(headPos.x, 0, headPos.z);
   renderer.render(scene, camera);
 }
 
