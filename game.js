@@ -160,14 +160,16 @@ function stepSnake() {
     return;
   }
 
-  if (snake.some((segment) => segment.x === next.x && segment.z === next.z)) {
+  const willGrow = next.x === food.x && next.z === food.z;
+  const collisionSegments = willGrow ? snake : snake.slice(0, -1);
+  if (collisionSegments.some((segment) => segment.x === next.x && segment.z === next.z)) {
     onGameOver("You crashed into yourself.");
     return;
   }
 
   snake.unshift(next);
 
-  if (next.x === food.x && next.z === food.z) {
+  if (willGrow) {
     score += 1;
     scoreEl.textContent = String(score);
     if (score > highScore) {
