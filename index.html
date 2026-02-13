@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Snake</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="hud">
+      <h1>3D Snake</h1>
+
+      <div class="scoreboard" aria-label="scoreboard">
+        <div class="score-row">
+          <span>Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div class="score-row">
+          <span>High Score</span>
+          <strong id="high-score">0</strong>
+        </div>
+        <div class="score-row status">
+          <span>Status</span>
+          <strong id="status">Ready</strong>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="start-btn" type="button">Start</button>
+        <button id="stop-btn" type="button">Stop</button>
+        <button id="restart-btn" type="button">Restart</button>
+      </div>
+
+      <p>Move: Arrow Keys or WASD</p>
+      <p>Quick pause toggle: Space</p>
+      <p>Restart after game over: Enter</p>
+    </div>
+
+    <canvas id="game"></canvas>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
